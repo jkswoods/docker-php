@@ -50,6 +50,8 @@ class ServiceResource extends Resource
     public function create(\Docker\API\Model\ServiceSpec $serviceSpec, $parameters = [], $fetch = self::FETCH_OBJECT)
     {
         $queryParam = new QueryParam();
+        $queryParam->setDefault('X-Registry-Auth', null);
+        $queryParam->setHeaderParameters(['X-Registry-Auth']);
         $url        = '/services/create';
         $url        = $url . ('?' . $queryParam->buildQueryString($parameters));
         $headers    = array_merge(['Host' => 'localhost'], $queryParam->buildHeaders($parameters));
